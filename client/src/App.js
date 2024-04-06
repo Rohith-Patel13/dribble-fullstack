@@ -1,10 +1,12 @@
-import DemoComponent from "./DemoComponent";
+
+import Main from "./components/Main/index";
+import "./App.css"
 
 
 function App() {
   return (
-    <div>
-   <DemoComponent />
+    <div className="root-bg">
+      <Main/>
     </div>
   );
 }

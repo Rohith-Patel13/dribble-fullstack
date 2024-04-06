@@ -28,12 +28,12 @@ const Login = () => {
     try {
       const response = await axios.post('http://localhost:8000/api/users/create',formData)
       console.log(response,"response")
-      if (response.statusText==="Created") {
+      if (response.status===201) {
         // Handle successful registration, maybe redirect to another page
         console.log("Registered success")
-      } else {
+      }else {
         // Handle registration failure
-        console.log("Registered failed")
+        console.log(response,"Registered failed")
         setSubmissionText("Registered failed")
       }
     } catch (error) {

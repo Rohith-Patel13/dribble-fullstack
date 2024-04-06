@@ -11,6 +11,18 @@ exports.createUser = async (requestObject,responseObject)=>{
 
     try {
 
+        const existingUser = await User.findOne({$or:[{username},{email}]})
+        if(existingUser){
+            let errorMessage = "";
+            if (existingUser.username === username) {
+                errorMessage = "Username has already been taken";
+            }
+            else if (existingUser.email===email){
+                errorMessage = "Email has already been taken";
+            }
+            return responseObject.status(400).send(errorMessage); // indicate a bad request from the client
+        }
+
         // encrypted password
         const encryptedPassword = await bcrypt.hash(password,10)
 

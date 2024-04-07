@@ -8,6 +8,7 @@ import loginBanner from "../../images/login-banner.png"
 
 
 const Login = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({name: '',username: '',
   email: '',password: '',isChecked: false,});
   const [formDataLogin, setFormDataLogin] = useState({ email: '', password: '' });
@@ -120,7 +121,7 @@ const Login = () => {
     setIsLoginPage(!isLoginPage)
   }
 
-  const navigate = useNavigate();
+  
 
   const handleLoginSubmit = async(event)=>{
     event.preventDefault()

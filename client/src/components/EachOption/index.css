@@ -1,0 +1,35 @@
+.select-option {
+    display: none; /* Hide the checkbox */
+}
+  
+/* Style the label to act as a custom checkbox */
+.select-option + label {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+}
+  
+/* Create the tick mark */
+.select-option + label::before {
+    content: '\2713'; /* Unicode character for checkmark */
+    color: transparent; /* Initially transparent */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+  
+/* When checkbox is checked, change background color to red and show the tick mark */
+.select-option:checked + label {
+    background-color: red;
+}
+  
+/* When checkbox is checked, show the white tick mark */
+.select-option:checked + label::before {
+    color: white;
+}

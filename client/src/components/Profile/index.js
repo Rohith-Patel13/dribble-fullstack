@@ -1,12 +1,13 @@
 import { useRef, useState } from 'react'
-
+import {useNavigate} from "react-router-dom"
 import './index.css'
 import camera from "../../images/camera-solid.svg"
 
 const Profile = () => {
-
+  const navigate = useNavigate();
   const uploadInputRef = useRef(null)
   const [imageChoosen,setImageChoosen] = useState('')
+  
 
   const imageUploadClick = ()=>{
     // console.log("Image Upload Click")
@@ -22,6 +23,12 @@ const Profile = () => {
     // console.log(event.target.files[0])
     setImageChoosen(event.target.files[0])
   }
+
+
+  const nextButtonClicked = ()=>{
+    navigate("/info")
+  }
+
 
   return (
     <div className='profile-bg'>
@@ -46,7 +53,9 @@ const Profile = () => {
       <h1>Add your location</h1>
       <input type='text' placeholder='Enter a location' />
 
-      <button type='button' className='btn btn-dangerx'>Next</button>
+      <button type='button' className='btn btn-danger'
+      onClick={nextButtonClicked}
+      >Next</button>
     </div>
   )
 }

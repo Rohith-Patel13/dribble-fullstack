@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import {useNavigate} from "react-router-dom"
-import {useDispatch} from "react-redux"
+// import {useDispatch} from "react-redux"
+import Cookies from "js-cookie"
 import axios from "axios"
-import {ActionCreators} from "../../redux/slice"
+// import {ActionCreators} from "../../redux/slice"
 import './index.css'
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import loginBanner from "../../images/login-banner.png"
@@ -11,8 +12,8 @@ import loginBanner from "../../images/login-banner.png"
 
 const Login = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
-  const {loggedInUserData} = ActionCreators
+  // const dispatch = useDispatch()
+  // const {loggedInUserData} = ActionCreators
   const [formData, setFormData] = useState({name: '',username: '',
   email: '',password: '',isChecked: false,});
   const [formDataLogin, setFormDataLogin] = useState({ email: '', password: '' });
@@ -72,6 +73,7 @@ const Login = () => {
 
     return Object.keys(errors).length === 0; // true or false
   };
+  
 
   const validateFormLogin=()=>{
     const errors = {};
@@ -138,7 +140,10 @@ const Login = () => {
           // Handle successful registration, maybe redirect to another page
           console.log("Login success")
           console.log(response.data.userData)
-          dispatch(loggedInUserData(response.data.userData))
+          // dispatch(loggedInUserData(response.data.userData))
+          const userEmail = response.data.userData.email
+          Cookies.set("email",userEmail,{ expires: 1 })// Created a cookie that expires 1 day from now, valid across the entire site
+          Cookies.set("jwtToken",response.data.jwtToken,{ expires: 1 })
           navigate("/profile")
         }else if(response.data.errorMessage){
           console.log(response.data.errorMessage)

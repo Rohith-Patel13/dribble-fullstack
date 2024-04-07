@@ -1,17 +1,18 @@
 import { useRef, useState } from 'react'
 import {useNavigate} from "react-router-dom"
-import {useDispatch} from "react-redux"
-import { ActionCreators } from '../../redux/slice'
+import Cookies from "js-cookie"
+// import {useDispatch} from "react-redux"
+// import { ActionCreators } from '../../redux/slice'
 import './index.css'
 import camera from "../../images/camera-solid.svg"
 
 
 const Profile = () => {
-  const dispatch=useDispatch()
-  const {imageUploaded} = ActionCreators
+  // const dispatch=useDispatch()
+  // const {imageUploaded} = ActionCreators
   const navigate = useNavigate();
   const uploadInputRef = useRef(null)
-  const [imageChoosen,setImageChoosen] = useState('')
+  const [imageChoosen,setImageChoosen] = useState(Cookies.get("imageurl"))
   
 
 
@@ -28,15 +29,16 @@ const Profile = () => {
     // console.log(event.target.files)
     // console.log(event.target.files[0])
     setImageChoosen(event.target.files[0])
-    dispatch(imageUploaded({imageUrl:URL.createObjectURL(event.target.files[0])}))
+    Cookies.set("imageurl",URL.createObjectURL(event.target.files[0]),{expires:1})
+    // dispatch(imageUploaded({imageUrl:URL.createObjectURL(event.target.files[0])}))
   }
 
 
   const nextButtonClicked = ()=>{
-    navigate("/info")
+    navigate("/")
   }
 
-
+  console.log(imageChoosen)
   return (
     <div className='profile-bg'>
       <h1>dribbble</h1>
@@ -45,8 +47,8 @@ const Profile = () => {
       <h1>Add an avatar</h1>
       <div className='image-upload-container cursor-pointer' onClick={imageUploadClick}>
         {
-          imageChoosen?(
-            <img src={URL.createObjectURL(imageChoosen)} alt='camera' className='upload-image' />
+          imageChoosen!==undefined?(
+            <img src={Cookies.get("imageurl")} alt='camera' className='upload-image' />
           ):(
             <div className='camera-bg'>
               <img src={camera} alt='camera' className='h-[25px] w-[25px]' />

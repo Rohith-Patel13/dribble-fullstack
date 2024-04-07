@@ -5,14 +5,15 @@ import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import loginBanner from "../../images/login-banner.png"
 
 
+
 const Login = () => {
   const [formData, setFormData] = useState({name: '',username: '',
   email: '',password: '',isChecked: false,});
+  const [formDataLogin, setFormDataLogin] = useState({ email: '', password: '' });
 
   const [validationErrors, setValidationErrors] = useState({});
-
   const [submissionText,setSubmissionText] = useState(null)
-
+  const [isLoginPage,setIsLoginPage] = useState(false)
 
 
   const handleChange = (e) => {
@@ -23,6 +24,14 @@ const Login = () => {
     }));
 
   };
+
+  const handleLoginEvent =(e)=>{
+    const {name,value} = e.target
+    setFormDataLogin((prevLoginFormData) => ({
+      ...prevLoginFormData,
+      [name]: value,
+    }));
+  }
 
   const validateForm = () => {
     const errors = {};
@@ -50,7 +59,7 @@ const Login = () => {
 
     // Validate password
     if (!formData.isChecked) {
-      errors.password = 'Please agree to the terms*';
+      errors.isChecked = 'Please agree to the terms*';
     }
 
     setValidationErrors(errors);
@@ -58,12 +67,29 @@ const Login = () => {
     return Object.keys(errors).length === 0; // true or false
   };
 
+  const validateFormLogin=()=>{
+    const errors = {};
+
+    const emailRegex = /\S+@\S+\.\S+/
+    if (!formDataLogin.email.trim() || !emailRegex.test(formDataLogin.email.trim())) {
+      errors.email = 'Invalid email address*';
+    }
+
+    // Validate password
+    if (formDataLogin.password.length<6) {
+      errors.password = 'Password must be at least 6 characters*';
+    }
+
+    setValidationErrors(errors);
+
+    return Object.keys(errors).length === 0; // true or false
+
+  }
+
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-
-
     try {
       if (validateForm()){
         const response = await axios.post('http://localhost:8000/api/users/create',formData)
@@ -88,15 +114,73 @@ const Login = () => {
     }
   };
 
+
+  const handleSignInRegister =()=>{
+    setIsLoginPage(!isLoginPage)
+  }
+
+  const handleLoginSubmit = async(event)=>{
+    event.preventDefault()
+
+    try {
+      if (validateFormLogin()){
+        const response = await axios.post('http://localhost:8000/api/users/login',formDataLogin)
+        console.log(response,"response")
+        if (response.status===201) {
+          // Handle successful registration, maybe redirect to another page
+          console.log("Login success")
+          setSubmissionText("Login success")
+        }else if(response.data.errorMessage){
+          console.log(response.data.errorMessage)
+          setSubmissionText(response.data.errorMessage)
+        }
+        else {
+          // Handle registration failure
+          console.log(response,"Login failed")
+          setSubmissionText("Login failed")
+        }
+      }
+    } catch (error) {
+      console.log('Error at Catch:', error.message);
+      setSubmissionText("Something went wrong,Please Try again")
+    }
+  }
+
   return (
     <div className="login-bg">
         <img src={loginBanner} alt="loginBanner"
         className='h-[600px]'  />
         <div className='main-form-bg'>
-            <p>Already a member?<span className='sign-in-text'>Sign in</span></p>
-            <h1>Sign up to Dribble</h1>
+            <p>{isLoginPage?"Didn't Register?":"Already a member?"}<span className='cursor-pointer sign-in-text' onClick={handleSignInRegister}>{isLoginPage?"Register":"Sign In"}</span></p>
+            <h1>{isLoginPage?"Login to Dribble":"Sign up to Dribble"}</h1>
             <p className='warning-text'>{submissionText}</p>
-            <form className='form-bg' onSubmit={handleSubmit}>
+            {
+              isLoginPage ? (
+                <form onSubmit={handleLoginSubmit}>
+                  <div className='email-bg flex flex-col'>
+                      <label className='cursor-pointer' htmlFor='emailLoginId'>Email</label>
+                      <input type='email' id='emailLoginId'
+                      name="email"
+                      value={formDataLogin.email}
+                      onChange={handleLoginEvent}
+                      className='form-control'
+                      placeholder='Enter Your Email' />    
+                      <p className='error-text'>{validationErrors.email}</p>                 
+                  </div>
+                  <div className='password-bg flex flex-col'>
+                    <label className='cursor-pointer' htmlFor='passwordLoginId'>Password</label>
+                    <input type='password' id='passwordLoginId'
+                      name="password"
+                      value={formDataLogin.password}
+                      onChange={handleLoginEvent}
+                      className='form-control'
+                      placeholder='6+ characters' />   
+                    <p className='error-text'>{validationErrors.password}</p>                
+                  </div>
+                  <button type='submit' className='btn btn-danger'>Login</button>
+                </form>
+              ):(
+              <form className='form-bg' onSubmit={handleSubmit}>
                 <div className='name-bg flex flex-col'>
                     <label className='cursor-pointer' htmlFor='nameId'>Name</label>
                     <input type='text' id='nameId'
@@ -148,7 +232,11 @@ const Login = () => {
                 </div>
                 <button type='submit' className='btn btn-danger'>Create an Account</button>
                 <p>This site is protected by reCAPTCHA and the Google <span>Privacy Policy</span> and <span>Notification Settings.</span></p>
-            </form>
+              </form>
+              )
+            }
+
+
         </div>
     </div>
   )

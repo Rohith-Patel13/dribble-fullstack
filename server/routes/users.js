@@ -8,4 +8,7 @@ const usersController = require("../controllers/users")
 // create
 router.post("/create",usersController.createUser)
 
+router.post("/login",usersController.loginUser)
+
+
 module.exports = router;

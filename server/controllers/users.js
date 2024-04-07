@@ -1,6 +1,10 @@
 const bcrypt = require("bcrypt")
+const jwt = require("jsonwebtoken");
+
+require("dotenv").config()
 
 const User = require("../models/users")
+
 
 
 // create handler function
@@ -10,7 +14,6 @@ exports.createUser = async (requestObject,responseObject)=>{
     const { name, username, email, password,isChecked } = requestObject.body;
 
     try {
-
         const existingUser = await User.findOne({$or:[{username},{email}]})
         if(existingUser){
             let errorMessage = "";
@@ -39,3 +42,39 @@ exports.createUser = async (requestObject,responseObject)=>{
     }
 }
 
+
+
+// login user
+exports.loginUser = async (requestObject,responseObject)=>{
+    console.log(requestObject.body)
+    const {email,password} = requestObject.body
+    try {
+        const existingUser = await User.findOne({$or:[{email}]})
+        if(!existingUser){
+            responseObject.status(400);
+            responseObject.send("Invalid user");
+        }
+        if(existingUser){
+            const comparePassword = await bcrypt.compare(password, existingUser.password);
+            console.log(comparePassword); 
+            if (!comparePassword) {
+                responseObject.status(400);
+                responseObject.send("Invalid password");
+            }else{
+                const payload = {
+                    username: existingUser.username,
+                    name: existingUser.name,
+                    user_id: existingUser._id,
+                };
+                const jwtCreatedToken = await jwt.sign(payload, process.env.SECRET_STRING);
+                  responseObject.send({
+                    jwtToken: jwtCreatedToken,
+                });
+            }       
+        }
+    } catch (error) {
+        console.log(error.message,"server")
+        responseObject.status(500)// server error
+        responseObject.send(error.message)        
+    }
+}

@@ -20,7 +20,7 @@ exports.createUser = async (requestObject,responseObject)=>{
             else if (existingUser.email===email){
                 errorMessage = "Email has already been taken";
             }
-            return responseObject.status(400).send(errorMessage); // indicate a bad request from the client
+            return responseObject.send({errorMessage}); // indicate a bad request from the client
         }
 
         // encrypted password

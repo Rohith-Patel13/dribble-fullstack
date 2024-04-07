@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import {useNavigate} from "react-router-dom"
 import axios from "axios"
 import './index.css'
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
@@ -119,6 +120,8 @@ const Login = () => {
     setIsLoginPage(!isLoginPage)
   }
 
+  const navigate = useNavigate();
+
   const handleLoginSubmit = async(event)=>{
     event.preventDefault()
 
@@ -126,10 +129,10 @@ const Login = () => {
       if (validateFormLogin()){
         const response = await axios.post('http://localhost:8000/api/users/login',formDataLogin)
         console.log(response,"response")
-        if (response.status===201) {
+        if (response.status===200) {
           // Handle successful registration, maybe redirect to another page
           console.log("Login success")
-          setSubmissionText("Login success")
+          navigate("/profile")
         }else if(response.data.errorMessage){
           console.log(response.data.errorMessage)
           setSubmissionText(response.data.errorMessage)

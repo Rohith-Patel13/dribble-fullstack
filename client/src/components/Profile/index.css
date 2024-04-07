@@ -1,0 +1,18 @@
+.camera-bg{
+    border: 2px dashed rgb(149, 148, 148);
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.upload-image{
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;   
+    cursor: pointer;
+}

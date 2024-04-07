@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import {useNavigate} from "react-router-dom"
+import {useDispatch} from "react-redux"
 import axios from "axios"
+import {ActionCreators} from "../../redux/slice"
 import './index.css'
 import '../../../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import loginBanner from "../../images/login-banner.png"
@@ -9,6 +11,8 @@ import loginBanner from "../../images/login-banner.png"
 
 const Login = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const {loggedInUserData} = ActionCreators
   const [formData, setFormData] = useState({name: '',username: '',
   email: '',password: '',isChecked: false,});
   const [formDataLogin, setFormDataLogin] = useState({ email: '', password: '' });
@@ -133,6 +137,8 @@ const Login = () => {
         if (response.status===200) {
           // Handle successful registration, maybe redirect to another page
           console.log("Login success")
+          console.log(response.data.userData)
+          dispatch(loggedInUserData(response.data.userData))
           navigate("/profile")
         }else if(response.data.errorMessage){
           console.log(response.data.errorMessage)
@@ -239,8 +245,6 @@ const Login = () => {
               </form>
               )
             }
-
-
         </div>
     </div>
   )

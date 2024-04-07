@@ -1,13 +1,19 @@
 import { useRef, useState } from 'react'
 import {useNavigate} from "react-router-dom"
+import {useDispatch} from "react-redux"
+import { ActionCreators } from '../../redux/slice'
 import './index.css'
 import camera from "../../images/camera-solid.svg"
 
+
 const Profile = () => {
+  const dispatch=useDispatch()
+  const {imageUploaded} = ActionCreators
   const navigate = useNavigate();
   const uploadInputRef = useRef(null)
   const [imageChoosen,setImageChoosen] = useState('')
   
+
 
   const imageUploadClick = ()=>{
     // console.log("Image Upload Click")
@@ -22,6 +28,7 @@ const Profile = () => {
     // console.log(event.target.files)
     // console.log(event.target.files[0])
     setImageChoosen(event.target.files[0])
+    dispatch(imageUploaded({imageUrl:URL.createObjectURL(event.target.files[0])}))
   }
 
 

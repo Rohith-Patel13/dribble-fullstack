@@ -64,11 +64,13 @@ exports.loginUser = async (requestObject,responseObject)=>{
                 const payload = {
                     username: existingUser.username,
                     name: existingUser.name,
+                    email:existingUser.email,
                     user_id: existingUser._id,
                 };
                 const jwtCreatedToken = await jwt.sign(payload, process.env.SECRET_STRING);
                   responseObject.send({
                     jwtToken: jwtCreatedToken,
+                    userData:payload,
                 });
             }       
         }
@@ -78,3 +80,4 @@ exports.loginUser = async (requestObject,responseObject)=>{
         responseObject.send(error.message)        
     }
 }
+

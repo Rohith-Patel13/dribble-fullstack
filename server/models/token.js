@@ -11,4 +11,6 @@ const tokenSchema = new Schema({
     createdAt:{type:Date,default:Date.now(),expires:3600} // 1 Hour
 });
 
-module.exports = model("token",tokenSchema)
+const Token = model("token",tokenSchema)
+
+module.exports = Token

@@ -1,6 +1,12 @@
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
 
+const Token = require("../models/token")
+const sendEmailId = require("../utils/sendEmail"); // Node.js doesn't support ES6 import statements natively yet. So, Use CommonJS syntax (require/module.exports)
+const crypto = require("crypto") // global module, so need not to install
+
+
+
 require("dotenv").config()
 
 const User = require("../models/users")
@@ -84,4 +90,18 @@ exports.loginUser = async (requestObject,responseObject)=>{
 
 exports.emailLogic = async (requestObject,responseObject)=>{
     console.log(requestObject.body)
+    const {emailId} = requestObject.body
+    try {
+        const token = await Token.create({
+            userId:user_id,
+            token:crypto.randomBytes(32).toString("hex")
+    
+        })
+        const url = `${process.env.BASE_URL}users/${user._id}/verify/${token.token}`
+        await sendEmailId(emailId,"Verify Email",url)
+
+        responseObject.status(201).send({message:"An Email sent to your account please verify"})
+    } catch (error) {
+        responseObject.status(500).send({message:"Internal server error"})
+    }
 }

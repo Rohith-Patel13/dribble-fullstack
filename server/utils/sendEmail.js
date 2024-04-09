@@ -4,7 +4,7 @@ require("dotenv").config()
 
 
 
-module.exports = async(email,subject,text)=>{
+const sendEmailId = async(email,subject,text)=>{
     try {
         const transporter = nodemailer.createTransport({
             host:process.env.HOST,
@@ -27,3 +27,7 @@ module.exports = async(email,subject,text)=>{
         console.log(error.message)
     }
 }
+
+// Node.js doesn't support ES6 module syntax by default
+module.exports = sendEmailId // Use CommonJS syntax (require/module.exports)
+

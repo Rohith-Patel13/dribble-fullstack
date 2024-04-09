@@ -81,3 +81,7 @@ exports.loginUser = async (requestObject,responseObject)=>{
     }
 }
 
+
+exports.emailLogic = async (requestObject,responseObject)=>{
+    console.log(requestObject.body)
+}

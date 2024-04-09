@@ -8,7 +8,10 @@ const usersController = require("../controllers/users")
 // create
 router.post("/create",usersController.createUser)
 
+// login
 router.post("/login",usersController.loginUser)
 
+// email
+router.post("/sendemail",usersController.emailLogic)
 
 module.exports = router;

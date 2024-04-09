@@ -7,6 +7,7 @@ const userSchema = new Schema({
     email: { type: String, required: true},
     password: { type: String, required: true },
     isChecked:{ type: Boolean, required: true },
+    verified:{type:Boolean,default:false}
 },{timestamps:true})
 
 // creating a model

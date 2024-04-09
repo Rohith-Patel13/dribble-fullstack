@@ -13,7 +13,7 @@ const Home = () => {
         const response = await axios.post("http://localhost:8000/api/users/sendemail",{emailId});
         console.log(response)
       } catch (error) {
-        console.log(error.message)
+        console.log(error.message,"at catch client")
       }
     }
     sendEmail()

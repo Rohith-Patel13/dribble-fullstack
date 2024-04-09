@@ -14,4 +14,6 @@ router.post("/login",usersController.loginUser)
 // email
 router.post("/sendemail",usersController.emailLogic)
 
+router.get("/:id/verify/:token",usersController.verifyUser)
+
 module.exports = router;

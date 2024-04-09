@@ -91,17 +91,61 @@ exports.loginUser = async (requestObject,responseObject)=>{
 exports.emailLogic = async (requestObject,responseObject)=>{
     console.log(requestObject.body)
     const {emailId} = requestObject.body
+    console.log(emailId)
     try {
-        const token = await Token.create({
-            userId:user_id,
-            token:crypto.randomBytes(32).toString("hex")
+        const existingUser = await User.findOne({$or:[{email:emailId}]})
+        console.log(existingUser,"existingUser")
+        if(!existingUser){
+            responseObject.status(400);
+            responseObject.send("Invalid user");
+        }
+        if(existingUser){
+        // Check if there's already an existing token for the user
+        let token = await Token.findOne({ userId: existingUser._id });
+        if (token) {
+            // If a token already exists, update it
+            token.token = crypto.randomBytes(32).toString("hex");
+            await token.save();
+        } else {
+            // If no token exists, create a new one
+            token = await Token.create({
+                userId: existingUser._id,
+                token: crypto.randomBytes(32).toString("hex")
+            });
+        }
+            console.log(token,"token")
     
-        })
-        const url = `${process.env.BASE_URL}users/${user._id}/verify/${token.token}`
-        await sendEmailId(emailId,"Verify Email",url)
+            const url = `${process.env.BASE_URL}/${existingUser._id}/verify/${token.token}`
+            console.log(url,"url")
+            await sendEmailId(emailId,"Verify Email",url)
 
-        responseObject.status(201).send({message:"An Email sent to your account please verify"})
+        }
+    } catch (error) {
+        console.log(error.message,"at server catch")
+        responseObject.status(500).send({message:"Internal server error"})
+    }
+}
+
+
+
+exports.verifyUser= async(responseObject,requestObject)=>{
+    console.log(requestObject.body)
+    try {
+        const user = await User.findOne(
+            {_id:requestObject.params.user_id}
+        )
+        if(!user) return responseObject.status(400).send({message:"Invalid link"})
+
+        const token = await Token.findOne({
+            userId:user._id,
+            token:requestObject.params.token
+        })
+        if(!token) return responseObject.status(400).send({message:"Invalid link"})
+        await User.updateOne({_id:user._id,verified:true})
+        await token.remove()
+        responseObject.status(200).send({message:"Email verified successfully"})
     } catch (error) {
         responseObject.status(500).send({message:"Internal server error"})
     }
 }
+

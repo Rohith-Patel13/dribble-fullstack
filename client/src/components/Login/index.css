@@ -4,3 +4,29 @@
     align-items: flex-start;
     margin: 1em;
 }
+
+.main-form-bg{
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    
+}
+.member{
+    align-self: flex-end;
+}
+.bold-text{
+    
+    font-weight: bold;
+}
+
+.violate-text{
+    color: rgb(15, 8, 228);
+}
+
+.error-text{
+    color: red;
+}
+.ash-text{
+    color: gray;
+}

@@ -115,7 +115,7 @@ exports.emailLogic = async (requestObject,responseObject)=>{
         }
             console.log(token,"token")
     
-            const url = `${process.env.BASE_URL}/${existingUser._id}/verify/${token.token}`
+            const url = `${process.env.BASE_URL}${existingUser._id}/verify/${token.token}`
             console.log(url,"url")
             await sendEmailId(emailId,"Verify Email",url)
 
@@ -128,6 +128,7 @@ exports.emailLogic = async (requestObject,responseObject)=>{
 
 
 
+/*
 exports.verifyUser= async(responseObject,requestObject)=>{
     console.log(requestObject.body)
     try {
@@ -148,4 +149,4 @@ exports.verifyUser= async(responseObject,requestObject)=>{
         responseObject.status(500).send({message:"Internal server error"})
     }
 }
-
+*/

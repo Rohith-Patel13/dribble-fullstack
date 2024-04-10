@@ -30,3 +30,13 @@
 .ash-text{
     color: gray;
 }
+.sign-in-text{
+    color: rgb(15, 8, 228);
+}
+.each-input{
+    background-color: gray;
+}
+.warning-text{
+    color: red;
+}
+

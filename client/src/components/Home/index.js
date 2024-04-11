@@ -3,6 +3,8 @@ import {useEffect} from "react"
 import axios from "axios"
 import './index.css'
 import FinalHeader from "../FinalHeader/index"
+import FinalHomeBody from "../FinalHomeBody/index"
+import Footer from "../Footer/index"
 
 
 const Home = () => {
@@ -25,6 +27,8 @@ const Home = () => {
   return (
     <div className="home-bg">
       <FinalHeader />
+      <FinalHomeBody />
+      <Footer/>
     </div>
   )
 }

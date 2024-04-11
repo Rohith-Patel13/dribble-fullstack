@@ -5,6 +5,7 @@ import Cookies from "js-cookie"
 // import { ActionCreators } from '../../redux/slice'
 import './index.css'
 import camera from "../../images/camera-solid.svg"
+import mainLogo from "../../images/main-logo.png"
 
 
 const Profile = () => {
@@ -41,30 +42,44 @@ const Profile = () => {
   console.log(imageChoosen)
   return (
     <div className='profile-bg'>
-      <h1>dribbble</h1>
-      <h1>Welcome! Let's create your profile</h1>
-      <p>Let others get to know you better!You can do these later</p>
-      <h1>Add an avatar</h1>
-      <div className='image-upload-container cursor-pointer' onClick={imageUploadClick}>
-        {
-          imageChoosen!==undefined?(
-            <img src={Cookies.get("imageurl")} alt='camera' className='upload-image' />
-          ):(
-            <div className='camera-bg'>
-              <img src={camera} alt='camera' className='h-[25px] w-[25px]' />
-            </div>
-          )
-        }
-        <input type='file'
-        onChange={inputFileChange}
-        ref={uploadInputRef} />
-      </div>
-      <h1>Add your location</h1>
-      <input type='text' placeholder='Enter a location' />
+      <header>
+        <img src={mainLogo}
+         className='p-3'
+         alt='mainLogo' />
+      </header>
 
-      <button type='button' className='btn btn-danger'
-      onClick={nextButtonClicked}
-      >Next</button>
+      <div className='bg-profile'>
+        <div>
+          <div className='text-left'>
+            <h1 className='text-3xl font-bold mb-3'>Welcome! Let's create your profile</h1>
+            <p className='mb-4'>Let others get to know you better!You can do these later</p>
+          </div>
+          <div className='mt-3'>
+            <h1>Add an avatar</h1>
+            <div className='image-upload-container cursor-pointer' onClick={imageUploadClick}>
+              {
+                imageChoosen!==undefined?(
+                  <img src={Cookies.get("imageurl")} alt='camera' className='upload-image' />
+                ):(
+                  <div className='camera-bg'>
+                    <img src={camera} alt='camera' className='h-[25px] w-[25px]' />
+                  </div>
+                )
+              }
+              <input type='file'
+              onChange={inputFileChange}
+              ref={uploadInputRef} />
+            </div>
+          </div>
+
+          <h1>Add your location</h1>
+          <input type='text' placeholder='Enter a location' />
+
+          <button type='button' className='btn btn-danger'
+          onClick={nextButtonClicked}
+          >Next</button>
+        </div>
+      </div>
     </div>
   )
 }

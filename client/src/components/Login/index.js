@@ -167,173 +167,174 @@ const Login = () => {
   }
 
   return (
-    <div className="login-bg">
-        <img src={loginBanner} alt="loginBanner"
-        className='h-[600px]'  />
-        <div className='main-form-bg'>
-            <p className='member mb-3'>{isLoginPage?"Not a member?":"Already a member?"}<span className='cursor-pointer sign-in-text' onClick={handleSignInRegister}>{isLoginPage?" Register":" Sign In"}</span></p>
-            <h1 className='bold-text text-[24px] mt-3 mb-3'>{isLoginPage?"Login to Dribble":"Sign up to Dribble"}</h1>
-            <p className={submissionText.isError?"warning-text":"success-text"}>{submissionText.text}</p>
-            {
-              isLoginPage ? (
-              <>
-                
-                <form onSubmit={handleLoginSubmit}>
-                  <div className='email-bg flex flex-col'>
+    <div className="root-bg">
+      <div className="login-bg">
+          <img src={loginBanner} alt="loginBanner"
+          className='h-[600px]'  />
+          <div className='main-form-bg'>
+              <p className='member mb-3'>{isLoginPage?"Not a member?":"Already a member?"}<span className='cursor-pointer sign-in-text' onClick={handleSignInRegister}>{isLoginPage?" Register":" Sign In"}</span></p>
+              <h1 className='bold-text text-[24px] mt-3 mb-3'>{isLoginPage?"Login to Dribble":"Sign up to Dribble"}</h1>
+              <p className={submissionText.isError?"warning-text":"success-text"}>{submissionText.text}</p>
+              {
+                isLoginPage ? (
+                <>
+                  
+                  <form onSubmit={handleLoginSubmit}>
+                    <div className='email-bg flex flex-col'>
+                        <div className='flex items-center mt-3'>
+                          {
+                            validationErrors.email?(
+                              <img src={triangleExclamation} 
+                              className='h-[15px] w-[15px]'
+                              alt='triangleExclamation' />
+                            ):null
+                          }
+
+                        <label className='cursor-pointer bold-text text-[18px]' htmlFor='emailLoginId'>Email</label>
+                        </div>
+
+                        <input type='email' id='emailLoginId'
+                        name="email"
+                        value={formDataLogin.email}
+                        onChange={handleLoginEvent}
+                        className='form-control bg-neutral-100 each-input'
+                        placeholder='Enter Your Email' />    
+                        <p className='error-text'>{validationErrors.email}</p>                 
+                    </div>
+                    <div className='password-bg flex flex-col'>
                       <div className='flex items-center mt-3'>
                         {
-                          validationErrors.email?(
+                          validationErrors.password?(
+                            <img src={triangleExclamation} 
+                            className='h-[15px] w-[15px]'
+                            alt='triangleExclamation'
+                            />
+                          ):null
+                        }
+
+                      <label className='cursor-pointer bold-text text-[18px]' htmlFor='passwordLoginId'>Password</label>
+                      </div>
+                      <input type='password' id='passwordLoginId'
+                        name="password"
+                        value={formDataLogin.password}
+                        onChange={handleLoginEvent}
+                        className='form-control bg-neutral-100 each-input'
+                        placeholder='6+ characters' />   
+                      <p className='error-text'>{validationErrors.password}</p>                
+                    </div>
+                    <button type='submit' className='btn btn-danger mt-3'>Login</button>
+                  </form>
+                </>
+                ):(
+                <>
+                
+                <form className='form-bg' onSubmit={handleSubmit}>
+                  <div className='flex justify-between items-center'>
+                    <div className='name-bg flex flex-col'>
+                        <div className='flex items-center'>
+                          {
+                            validationErrors.name?(
+                              <img src={triangleExclamation} 
+                              className='h-[15px] w-[15px] exclamatory-icon'
+                              alt='triangleExclamation'
+                              />
+                            ):null
+                          }
+
+                          <label className='cursor-pointer bold-text text-[18px]' htmlFor='nameId'>Name</label>
+                        </div>
+
+                        <input type='text' id='nameId'
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        className={`form-control ${validationErrors.username?"bg-red-200":"bg-neutral-100"}`}
+                        placeholder='Enter Your Name' />
+                        <p className='error-text'>{validationErrors.name}</p>
+                    </div>
+                    <div className='username-bg flex flex-col'>
+                      <div className='flex items-center'>
+                        {
+                          validationErrors.username || isAlreadyExistsAt==="username" ?(
                             <img src={triangleExclamation} 
                             className='h-[15px] w-[15px]'
                             alt='triangleExclamation' />
                           ):null
                         }
 
-                      <label className='cursor-pointer bold-text text-[18px]' htmlFor='emailLoginId'>Email</label>
+                        <label className='cursor-pointer bold-text text-[18px]' htmlFor='usernameId'>User Name</label>
                       </div>
+                        <input type='text' id='usernameId'
+                        
+                        className={`form-control ${validationErrors.username?"bg-red-200":"bg-neutral-100"}`}
+                        name="username"
+                        value={formData.username}
+                        onChange={handleChange}
+                        placeholder='Enter Your User Name' />
+                        <p className='error-text'>{validationErrors.username}</p>
+                    </div>
+                  </div>
 
-                      <input type='email' id='emailLoginId'
+                  <div className='email-bg flex flex-col'>
+                      <div className='flex items-center mt-3'>
+                        {
+                          validationErrors.email || isAlreadyExistsAt==="email"?(
+                            <img src={triangleExclamation} 
+                            className='h-[15px] w-[15px]'
+                            alt='triangleExclamation' />                         
+                          ):null
+                        }
+                        <label className='cursor-pointer bold-text text-[18px]' htmlFor='emailId'>Email</label>
+                      </div>
+                      <input type='email' id='emailId'
                       name="email"
-                      value={formDataLogin.email}
-                      onChange={handleLoginEvent}
-                      className='form-control bg-neutral-100 each-input'
-                      placeholder='Enter Your Email' />    
-                      <p className='error-text'>{validationErrors.email}</p>                 
+                      value={formData.email}
+                      onChange={handleChange}
+                      className={`form-control ${validationErrors.email?"bg-red-200":"bg-neutral-100"}`}
+                      placeholder='Enter Your Email' />
+                      <p className='error-text'>{validationErrors.email}</p>
                   </div>
                   <div className='password-bg flex flex-col'>
-                    <div className='flex items-center mt-3'>
-                      {
-                        validationErrors.password?(
-                          <img src={triangleExclamation} 
-                          className='h-[15px] w-[15px]'
-                          alt='triangleExclamation'
-                          />
-                        ):null
-                      }
-
-                    <label className='cursor-pointer bold-text text-[18px]' htmlFor='passwordLoginId'>Password</label>
-                    </div>
-                    <input type='password' id='passwordLoginId'
-                      name="password"
-                      value={formDataLogin.password}
-                      onChange={handleLoginEvent}
-                      className='form-control bg-neutral-100 each-input'
-                      placeholder='6+ characters' />   
-                    <p className='error-text'>{validationErrors.password}</p>                
-                  </div>
-                  <button type='submit' className='btn btn-danger'>Login</button>
-                </form>
-              </>
-              ):(
-              <>
-              
-              <form className='form-bg' onSubmit={handleSubmit}>
-                <div className='flex justify-between items-center'>
-                  <div className='name-bg flex flex-col'>
-                      <div className='flex items-center'>
+                      <div className='flex items-center mt-3'>
                         {
-                          validationErrors.name?(
+                          validationErrors.password?(
                             <img src={triangleExclamation} 
-                            className='h-[15px] w-[15px] exclamatory-icon'
-                            alt='triangleExclamation'
-                             />
+                            className='h-[15px] w-[15px]'
+                            alt='triangleExclamation' />
                           ):null
                         }
 
-                        <label className='cursor-pointer bold-text text-[18px]' htmlFor='nameId'>Name</label>
+                      <label className='cursor-pointer bold-text text-[18px]' htmlFor='passwordId'>Password</label>
                       </div>
-
-                      <input type='text' id='nameId'
-                      name="name"
-                      value={formData.name}
+                      <input type='password' id='passwordId'
+                      name="password"
+                      value={formData.password}
                       onChange={handleChange}
-                      className='form-control bg-neutral-100 each-input'
-                      placeholder='Enter Your Name' />
-                      <p className='error-text'>{validationErrors.name}</p>
+                      className={`form-control ${validationErrors.username?"bg-red-200":"bg-neutral-100"}`}
+                      placeholder='6+ characters' />
+                      <p className='error-text'>{validationErrors.password}</p>
                   </div>
-                  <div className='username-bg flex flex-col'>
-                    <div className='flex items-center'>
-                      {
-                        validationErrors.username || isAlreadyExistsAt==="username" ?(
-                          <img src={triangleExclamation} 
-                          className='h-[15px] w-[15px]'
-                          alt='triangleExclamation' />
-                        ):null
-                      }
-
-                      <label className='cursor-pointer bold-text text-[18px]' htmlFor='usernameId'>User Name</label>
-                    </div>
-                      <input type='text' id='usernameId'
-                      className={`${validationErrors.username || isAlreadyExistsAt==="username"?"bg-red-200 text-rose-500":"bg-neutral-100"}
-                      
-                       form-control`}
-                      name="username"
-                      value={formData.username}
+                  <div className='flex flex-col mt-3'>
+                    <div className='flex items-start'>
+                      <input type='checkbox'
+                      name="isChecked"
+                      checked={formData.isChecked}
                       onChange={handleChange}
-                      placeholder='Enter Your User Name' />
-                      <p className='error-text'>{validationErrors.username}</p>
-                  </div>
-                </div>
-
-                <div className='email-bg flex flex-col'>
-                    <div className='flex items-center mt-3'>
-                      {
-                        validationErrors.email || isAlreadyExistsAt==="email"?(
-                          <img src={triangleExclamation} 
-                          className='h-[15px] w-[15px]'
-                          alt='triangleExclamation' />                         
-                        ):null
-                      }
-                      <label className='cursor-pointer bold-text text-[18px]' htmlFor='emailId'>Email</label>
+                      className='cursor-pointer h-[30px] w-[30px]
+                        bg-neutral-100 mr-3 each-input' />
+                      <p>Creating an account means you're okay with our <span className='violate-text'>Terms of Service, Privacy Policy,</span> and our default <span className='violate-text'>Notification Settings.</span></p>
                     </div>
-                    <input type='email' id='emailId'
-                     name="email"
-                     value={formData.email}
-                     onChange={handleChange}
-                     className='form-control bg-neutral-100 each-input'
-                     placeholder='Enter Your Email' />
-                    <p className='error-text'>{validationErrors.email}</p>
-                </div>
-                <div className='password-bg flex flex-col'>
-                    <div className='flex items-center mt-3'>
-                      {
-                        validationErrors.password?(
-                          <img src={triangleExclamation} 
-                          className='h-[15px] w-[15px]'
-                          alt='triangleExclamation' />
-                        ):null
-                      }
 
-                    <label className='cursor-pointer bold-text text-[18px]' htmlFor='passwordId'>Password</label>
-                    </div>
-                    <input type='password' id='passwordId'
-                     name="password"
-                     value={formData.password}
-                     onChange={handleChange}
-                     className='form-control bg-neutral-100 each-input'
-                     placeholder='6+ characters' />
-                    <p className='error-text'>{validationErrors.password}</p>
-                </div>
-                <div className='flex flex-col mt-3'>
-                  <div className='flex items-start'>
-                    <input type='checkbox'
-                     name="isChecked"
-                     checked={formData.isChecked}
-                     onChange={handleChange}
-                     className='cursor-pointer h-[30px] w-[30px]
-                      bg-neutral-100 mr-3 each-input' />
-                    <p>Creating an account means you're okay with our <span className='violate-text'>Terms of Service, Privacy Policy,</span> and our default <span className='violate-text'>Notification Settings.</span></p>
+                    <p className='error-text'>{validationErrors.isChecked}</p>
                   </div>
-
-                  <p className='error-text'>{validationErrors.isChecked}</p>
-                </div>
-                <button type='submit' className='btn btn-danger mt-3'>Create an Account</button>
-                <p className='mt-3 ash-text'>This site is protected by reCAPTCHA and the Google <span className='violate-text'>Privacy Policy</span> and <span className='violate-text'>Notification Settings.</span></p>
-              </form>
-            </>
-              )
-            }
-        </div>
+                  <button type='submit' className='btn btn-danger mt-3'>Create an Account</button>
+                  <p className='mt-3 ash-text'>This site is protected by reCAPTCHA and the Google <span className='violate-text'>Privacy Policy</span> and <span className='violate-text'>Notification Settings.</span></p>
+                </form>
+              </>
+                )
+              }
+          </div>
+      </div>
     </div>
   )
 }

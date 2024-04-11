@@ -1,3 +1,7 @@
+.profile-bg{
+    min-height: 100vh;
+}
+
 .camera-bg{
     border: 2px dashed rgb(149, 148, 148);
     border-radius: 50%;
@@ -15,4 +19,12 @@
     height: 120px;
     width: 120px;   
     cursor: pointer;
+}
+.bg-profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1em;
+    margin: auto;
 }

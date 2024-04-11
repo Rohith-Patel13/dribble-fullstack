@@ -56,16 +56,16 @@ exports.loginUser = async (requestObject,responseObject)=>{
     const {email,password} = requestObject.body
     try {
         const existingUser = await User.findOne({$or:[{email}]})
-        if(!existingUser){
-            responseObject.status(400);
-            responseObject.send("Invalid user");
+        console.log(existingUser,"retrieved from database")
+        if(existingUser===null){   
+            return responseObject.send({errorMessage:{errorText:"Invalid Registered Email",at:"email"}});
         }
         if(existingUser){
             const comparePassword = await bcrypt.compare(password, existingUser.password);
             console.log(comparePassword); 
             if (!comparePassword) {
-                responseObject.status(400);
-                responseObject.send("Invalid password");
+                
+                return responseObject.send({errorMessage:{errorText:"Invalid Password",at:"email"}});
             }else{
                 const payload = {
                     username: existingUser.username,

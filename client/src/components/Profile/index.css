@@ -1,5 +1,5 @@
 .profile-bg{
-    min-height: 100vh;
+    max-height: 100vh;
 }
 
 .camera-bg{
@@ -27,4 +27,29 @@
     align-items: center;
     padding: 1em;
     margin: auto;
+}
+
+.image-upload-container{
+    display: flex;
+    align-items: center;
+}
+.file-upload{
+    display: none;
+}
+.choose-image{
+    color: black;
+    border: 1px solid rgb(194, 192, 192);
+    border-radius: 8px;
+    font-weight: 600;
+    margin-left: 3em;
+}
+
+.footer-bg{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.input-horizontal{
+    border: 1px solid gray;
+    width: 100%;
 }

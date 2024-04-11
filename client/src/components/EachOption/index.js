@@ -6,9 +6,12 @@ const EachOption = (props) => {
   // console.log(eachOption)
   const {image,desc,id} = eachOption
   return (
-    <div>
-      <img src={image} alt="designer" />
-      <h1>{desc}</h1>
+    <div className='m-5 flex card
+    flex-col items-center'>
+      <img src={image}
+       className='mb-3'
+       alt="designer" />
+      <h1 className='mb-3 text-[17px] font-bold'>{desc}</h1>
       <input type="checkbox" id={id} className="select-option" />
       <label htmlFor={id}></label>
     </div>

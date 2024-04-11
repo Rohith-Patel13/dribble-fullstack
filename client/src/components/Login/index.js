@@ -19,8 +19,9 @@ const Login = () => {
   const [formDataLogin, setFormDataLogin] = useState({ email: '', password: '' });
 
   const [validationErrors, setValidationErrors] = useState({});
-  const [submissionText,setSubmissionText] = useState(null);
+  const [submissionText,setSubmissionText] = useState({text:"",isError:false});
   const [isLoginPage,setIsLoginPage] = useState(false);
+  const [isAlreadyExistsAt,setIsAlreadyExistsAt] = useState(null)
 
 
 
@@ -106,29 +107,32 @@ const Login = () => {
         if (response.status===201) {
           // Handle successful registration, maybe redirect to another page
           console.log("Registered success")
-          setSubmissionText("Registered success")
+          setSubmissionText({text:"* Registered Successfully",isError:false})
+          setIsAlreadyExistsAt(null)
         }else if(response.data.errorMessage){
-          console.log(response.data.errorMessage)
-          setSubmissionText(response.data.errorMessage)
+          console.log(response.data.errorMessage.errorText)
+          setSubmissionText({text:`* ${response.data.errorMessage.errorText}`,isError:true})
+          setIsAlreadyExistsAt(response.data.errorMessage.at)
         }
         else {
           // Handle registration failure
-          console.log(response,"Registered failed")
-          setSubmissionText("Registered failed")
+          console.log(response,"Registeration failed")
+          setSubmissionText({text:"* Registeration failed",isError:true})
         }
       }
     } catch (error) {
       console.log('Error at Catch:', error.message);
-      setSubmissionText("Something went wrong,Please Try again")
+      setSubmissionText({text:"* Something went wrong,Please Try again",isError:true})
     }
   };
 
 
   const handleSignInRegister =()=>{
     setIsLoginPage(!isLoginPage)
+    setSubmissionText({text:"",isError:false})
+    setFormData({name: '',username: '',
+    email: '',password: '',isChecked: false,})
   }
-
-  
 
   const handleLoginSubmit = async(event)=>{
     event.preventDefault()
@@ -148,17 +152,17 @@ const Login = () => {
           navigate("/profile")
         }else if(response.data.errorMessage){
           console.log(response.data.errorMessage)
-          setSubmissionText(response.data.errorMessage)
+          setSubmissionText({text:`* ${response.data.errorMessage.errorText}`,isError:true})
         }
         else {
           // Handle registration failure
           console.log(response,"Login failed")
-          setSubmissionText("Login failed")
+          setSubmissionText({text:"* Login failed",isError:true})
         }
       }
     } catch (error) {
       console.log('Error at Catch:', error.message);
-      setSubmissionText("* Something went wrong,Please Try again")
+      setSubmissionText({text:"* Something went wrong,Please Try again",isError:true})
     }
   }
 
@@ -169,9 +173,11 @@ const Login = () => {
         <div className='main-form-bg'>
             <p className='member mb-3'>{isLoginPage?"Not a member?":"Already a member?"}<span className='cursor-pointer sign-in-text' onClick={handleSignInRegister}>{isLoginPage?" Register":" Sign In"}</span></p>
             <h1 className='bold-text text-[24px] mt-3 mb-3'>{isLoginPage?"Login to Dribble":"Sign up to Dribble"}</h1>
-            <p className='warning-text'>{submissionText}</p>
+            <p className={submissionText.isError?"warning-text":"success-text"}>{submissionText.text}</p>
             {
               isLoginPage ? (
+              <>
+                
                 <form onSubmit={handleLoginSubmit}>
                   <div className='email-bg flex flex-col'>
                       <div className='flex items-center mt-3'>
@@ -217,7 +223,10 @@ const Login = () => {
                   </div>
                   <button type='submit' className='btn btn-danger'>Login</button>
                 </form>
+              </>
               ):(
+              <>
+              
               <form className='form-bg' onSubmit={handleSubmit}>
                 <div className='flex justify-between items-center'>
                   <div className='name-bg flex flex-col'>
@@ -245,7 +254,7 @@ const Login = () => {
                   <div className='username-bg flex flex-col'>
                     <div className='flex items-center'>
                       {
-                        validationErrors.username?(
+                        validationErrors.username || isAlreadyExistsAt==="username" ?(
                           <img src={triangleExclamation} 
                           className='h-[15px] w-[15px]'
                           alt='triangleExclamation' />
@@ -255,7 +264,9 @@ const Login = () => {
                       <label className='cursor-pointer bold-text text-[18px]' htmlFor='usernameId'>User Name</label>
                     </div>
                       <input type='text' id='usernameId'
-                      className='form-control bg-neutral-100 each-input'
+                      className={`${validationErrors.username || isAlreadyExistsAt==="username"?"bg-red-200 text-rose-500":"bg-neutral-100"}
+                      
+                       form-control`}
                       name="username"
                       value={formData.username}
                       onChange={handleChange}
@@ -267,7 +278,7 @@ const Login = () => {
                 <div className='email-bg flex flex-col'>
                     <div className='flex items-center mt-3'>
                       {
-                        validationErrors.email?(
+                        validationErrors.email || isAlreadyExistsAt==="email"?(
                           <img src={triangleExclamation} 
                           className='h-[15px] w-[15px]'
                           alt='triangleExclamation' />                         
@@ -309,7 +320,8 @@ const Login = () => {
                      name="isChecked"
                      checked={formData.isChecked}
                      onChange={handleChange}
-                     className='cursor-pointer bg-neutral-100 mr-3 each-input' />
+                     className='cursor-pointer h-[30px] w-[30px]
+                      bg-neutral-100 mr-3 each-input' />
                     <p>Creating an account means you're okay with our <span className='violate-text'>Terms of Service, Privacy Policy,</span> and our default <span className='violate-text'>Notification Settings.</span></p>
                   </div>
 
@@ -318,6 +330,7 @@ const Login = () => {
                 <button type='submit' className='btn btn-danger mt-3'>Create an Account</button>
                 <p className='mt-3 ash-text'>This site is protected by reCAPTCHA and the Google <span className='violate-text'>Privacy Policy</span> and <span className='violate-text'>Notification Settings.</span></p>
               </form>
+            </>
               )
             }
         </div>

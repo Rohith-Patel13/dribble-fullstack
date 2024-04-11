@@ -22,14 +22,14 @@ exports.createUser = async (requestObject,responseObject)=>{
     try {
         const existingUser = await User.findOne({$or:[{username},{email}]})
         if(existingUser){
-            let errorMessage = "";
+            let errorMessage = null;
             if (existingUser.username === username) {
-                errorMessage = "Username has already been taken";
+                errorMessage = {errorText:"Username has already been taken",at:"username"};
             }
             else if (existingUser.email===email){
-                errorMessage = "Email has already been taken";
+                errorMessage = {errorText:"Email has already been taken",at:"email"};
             }
-            return responseObject.send({errorMessage}); // indicate a bad request from the client
+            return responseObject.send({errorMessage});
         }
 
         // encrypted password

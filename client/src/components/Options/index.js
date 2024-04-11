@@ -1,4 +1,5 @@
 import {v4 as uuidv4} from "uuid"
+import {useNavigate} from "react-router-dom"
 import './index.css'
 import designer from "../../images/designer.png"
 import designerInspiration from "../../images/designer-inspiration.png"
@@ -31,13 +32,27 @@ const options = [
 
 
 const Options = () => {
+
+  const navigate= useNavigate()
+
+  const backButtonClicked =()=>{
+    navigate("/profile")
+  }
+
+  const finishButtonClicked = ()=>{
+    navigate("/")
+  }
+
   return (
     <div>
       <div className="flex items-center">
         <Header />
         <img src={backside}
          className="cursor-pointer"
-         alt="backside" />
+         alt="backside" 
+         onClick={backButtonClicked}
+         />
+         
       </div>
 
       <div className="options-bg">
@@ -51,7 +66,9 @@ const Options = () => {
             ))
           }
         </div>
-        <button className="btn btn-danger">Finish</button>
+        <button className="btn btn-danger"
+        onClick={finishButtonClicked}
+        >Finish</button>
       </div>
 
     </div>

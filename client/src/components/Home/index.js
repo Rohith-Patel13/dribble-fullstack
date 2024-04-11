@@ -2,9 +2,12 @@ import Cookies from "js-cookie"
 import {useEffect} from "react"
 import axios from "axios"
 import './index.css'
+import FinalHeader from "../FinalHeader/index"
+
 
 const Home = () => {
   const emailId = Cookies.get("email");
+  console.log(emailId)
 
   useEffect(()=>{
 
@@ -20,8 +23,8 @@ const Home = () => {
   })
 
   return (
-    <div>
-      {emailId}
+    <div className="home-bg">
+      <FinalHeader />
     </div>
   )
 }

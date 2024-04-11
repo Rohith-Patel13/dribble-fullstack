@@ -57,7 +57,7 @@ const Profile = () => {
              cursor-pointer' onClick={imageUploadClick}>
               {
                 imageChoosen!==undefined?(
-                  <img src={Cookies.get("imageurl")} alt='camera' className='upload-image' />
+                  <img src={Cookies.get("imageurl")} alt='uploadedimage' className='upload-image' />
                 ):(
                   <div className='camera-bg'>
                     <img src={camera} alt='camera' className='h-[25px] w-[25px]' />

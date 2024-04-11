@@ -6,14 +6,16 @@ const EachOption = (props) => {
   // console.log(eachOption)
   const {image,desc,id} = eachOption
   return (
-    <div className='m-5 flex card
+    <div className='m-4 flex card
     flex-col items-center'>
       <img src={image}
-       className='mb-3'
-       alt="designer" />
-      <h1 className='mb-3 text-[17px] font-bold'>{desc}</h1>
-      <input type="checkbox" id={id} className="select-option" />
-      <label htmlFor={id}></label>
+       className='mb-3 w-[280px]'
+       alt="designer" />     
+      <h1 className='desc-text w-[200px] mb-3 text-[17px] font-bold'>{desc}</h1>      
+      <div>
+        <input type="checkbox" id={id} className="select-option" />
+        <label htmlFor={id}></label>
+      </div>
     </div>
   )
 }

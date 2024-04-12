@@ -8,6 +8,10 @@
 .image-login{
     height: 100vh;
 }
+.name-username-bg{
+    display: flex;
+    align-items: center;
+}
 
 .login-bg{
     display: flex;
@@ -15,16 +19,20 @@
     /* align-items: flex-start; */
     align-items: center;
     margin: 1em;
-    margin-top: 0px;
+    /* margin-top: 0px;
     margin-bottom: 0px;
+    min-height: 100vh;  */
+    min-height: 100vh;
 }
 
 .main-form-bg{
-    width: 600px;
+    /* width: 600px; */
+    max-width: 600px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    
+    /* align-items: center; */
+    /* min-height: 100vh; */
 }
 .member{
     align-self: flex-end;
@@ -53,4 +61,46 @@
 }
 .success-text{
     color: green;
+}
+
+
+@media screen and (max-width: 1200px) {
+    .image-login {
+      display: none;
+    }
+    .login-bg{
+        flex-direction: column;
+        justify-content: center;
+        /* margin: 0px; */
+    }
+  }
+  
+@media screen and (max-width:760px) {
+    
+    .form-bg{
+        width: 400px;
+    }
+    .main-form-bg{
+        align-items: center;
+    }
+    .member{
+        align-self: center;
+    }
+    .name-username-bg{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .name-bg,.username-bg{
+        width: 100%;
+    }
+    .username-bg{
+        margin-top: 16px;
+    }
+    
+}
+
+@media screen and (max-width:460px) {
+    .form-bg{
+        width: 300px;
+    }
 }

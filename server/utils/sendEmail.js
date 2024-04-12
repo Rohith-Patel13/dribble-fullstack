@@ -6,11 +6,12 @@ console.log(typeof(process.env.EMAIL_PORT))
 
 
 const sendEmailId = async(email,subject,text)=>{
+    console.log(email,subject,text)
     try {
         const transporter = nodemailer.createTransport({
             host:process.env.HOST,
             service:process.env.SERVICE,
-            port:process.env.EMAIL_PORT,
+            port:Number(process.env.EMAIL_PORT),
             secure:Boolean(process.env.SECURE),
             auth:{
                 user:process.env.USER,

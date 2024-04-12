@@ -10,7 +10,7 @@ import dribbble from "../../images/dribbble.svg"
 
 const Footer = () => {
   return (
-    <div className='p-[1em] footer-bg bg-slate-100'>
+    <div className='p-[1em] footer-original-bg bg-slate-100'>
       <div className='p-[1em] footer-all-desc-bg'>
         <div className='flex flex-col contact-footer'>
           <img className='h-[25px] w-[60px]' src={mainLogo} alt='' />

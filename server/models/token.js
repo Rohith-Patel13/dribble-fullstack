@@ -5,7 +5,7 @@ const tokenSchema = new Schema({
         type:Schema.Types.ObjectId,
         required:true,
         ref:"User",
-        unique:true,
+        // unique:true,
     },
     token:{type:String,required:true},
     createdAt:{type:Date,default:Date.now(),expires:3600} // 1 Hour

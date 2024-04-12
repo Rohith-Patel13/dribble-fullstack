@@ -30,7 +30,7 @@ const Profile = () => {
     // console.log(event.target.files)
     // console.log(event.target.files[0])
     setImageChoosen(event.target.files[0])
-    Cookies.set("imageurl",URL.createObjectURL(event.target.files[0]),{expires:1})
+    Cookies.set("imageurl",URL.createObjectURL(event.target.files[0]),{expires:0.5})
     // dispatch(imageUploaded({imageUrl:URL.createObjectURL(event.target.files[0])}))
   }
 

@@ -147,8 +147,8 @@ const Login = () => {
           console.log(response.data.userData)
           // dispatch(loggedInUserData(response.data.userData))
           const userEmail = response.data.userData.email
-          Cookies.set("email",userEmail,{ expires: 1 })// Created a cookie that expires 1 day from now, valid across the entire site
-          Cookies.set("jwtToken",response.data.jwtToken,{ expires: 1 })
+          Cookies.set("email",userEmail,{ expires: 0.5 })// Created a cookie that expires in half a day (12 hours) from now, valid across the entire site
+          Cookies.set("jwtToken",response.data.jwtToken,{ expires: 0.5 })
           navigate("/profile")
         }else if(response.data.errorMessage){
           console.log(response.data.errorMessage)

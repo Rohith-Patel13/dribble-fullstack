@@ -1,4 +1,5 @@
 import {v4 as uuidv4} from "uuid"
+// import { useState } from "react"
 import {useNavigate} from "react-router-dom"
 import './index.css'
 import designer from "../../images/designer.png"
@@ -34,7 +35,9 @@ const options = [
 const Options = () => {
 
   const navigate= useNavigate()
+  // const [isCheck,setIsCheck] = useState(null)
 
+  
   const backButtonClicked =()=>{
     navigate("/profile")
   }
@@ -42,6 +45,10 @@ const Options = () => {
   const finishButtonClicked = ()=>{
     navigate("/")
   }
+ 
+  // const choosen = (isChecked) => {
+  //   setIsCheck(isChecked)
+  // }
 
   return (
     <div>
@@ -62,10 +69,15 @@ const Options = () => {
         <div className="flex flex-wrap justify-center items-center main-options-bg mt-3 mb-5">
           {
             options.map((eachOption)=>(
-              <EachOption eachOption={eachOption} key={eachOption.id} />
+              <EachOption
+              //  choosen={choosen}
+               eachOption={eachOption} key={eachOption.id} />
             ))
           }
         </div>
+
+        {/* {isCheck?<p className="font-bold">Anything else? You can select multiple</p>:null} */}
+
         <button className="btn btn-danger"
         onClick={finishButtonClicked}
         >Finish</button>

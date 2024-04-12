@@ -12,6 +12,10 @@ const EachOption = (props) => {
     setIsChecked(!isChecked);
   };
 
+  // const optionChoosen =()=>{
+  //   choosen(isChecked)
+  // }
+
   return (
     <div className={`m-5 flex card
     flex-col items-center ${isChecked ? 'checked' : ''}`}>
@@ -29,6 +33,7 @@ const EachOption = (props) => {
           <input type="checkbox"
           checked={isChecked}
           onChange={handleCheckboxChange}
+          // onClick={optionChoosen}
           id={id} className="select-option" />
           <label htmlFor={id}></label>
         </div>

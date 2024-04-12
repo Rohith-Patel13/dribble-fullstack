@@ -167,13 +167,14 @@ const Login = () => {
   }
 
   return (
-    <div className="root-bg">
+    // <div className="root-bg">
       <div className="login-bg">
           <img src={loginBanner} alt="loginBanner"
-          className='h-[600px]'  />
+          className='image-login'
+            />
           <div className='main-form-bg'>
               <p className='member mb-3'>{isLoginPage?"Not a member?":"Already a member?"}<span className='cursor-pointer sign-in-text' onClick={handleSignInRegister}>{isLoginPage?" Register":" Sign In"}</span></p>
-              <h1 className='bold-text text-[24px] mt-3 mb-3'>{isLoginPage?"Login to Dribble":"Sign up to Dribble"}</h1>
+              <h1 className='bold-text text-[24px] mt-3 mb-3'>{isLoginPage?"Login to Dribbble":"Sign up to Dribbble"}</h1>
               <p className={submissionText.isError?"warning-text":"success-text"}>{submissionText.text}</p>
               {
                 isLoginPage ? (
@@ -335,7 +336,7 @@ const Login = () => {
               }
           </div>
       </div>
-    </div>
+    // </div>
   )
 }
 

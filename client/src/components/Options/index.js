@@ -57,7 +57,7 @@ const Options = () => {
 
       <div className="options-bg">
         <h1 className="text-4xl font-bold mb-2">What brings you to Dribbble?</h1>
-        <p className="text-slate-500 mb-5">Select the options that best describes you. Don't worry,you can explore other options later</p>
+        <p className="text-slate-500 mb-[100px]">Select the options that best describes you. Don't worry,you can explore other options later</p>
 
         <div className="flex flex-wrap justify-center items-center main-options-bg mt-3 mb-5">
           {

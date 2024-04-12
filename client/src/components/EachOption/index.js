@@ -13,18 +13,18 @@ const EachOption = (props) => {
   };
 
   return (
-    <div className={`m-4 flex card
+    <div className={`m-5 flex card
     flex-col items-center ${isChecked ? 'checked' : ''}`}>
       <img src={image}
        className={`mb-3 w-[280px] ${isChecked?"card-image":""}`}
        alt="designer"
        />     
 
-      <div className='flex flex-col justify-center items-center
-       text-center
-       desc-card-profile'> 
+      <div className={`flex flex-col 
+      justify-center items-center text-center
+       ${isChecked?"desc-card-profile":""}`}> 
         <h1 className='desc-text w-[200px] mb-3 text-[17px] font-bold'>{desc}</h1>   
-        <p className='w-[250px]'>{isChecked?para:null}</p>   
+        <p className='w-[250px] mb-1'>{isChecked?para:null}</p>   
         <div>
           <input type="checkbox"
           checked={isChecked}

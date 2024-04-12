@@ -50,6 +50,6 @@
 }
 
 .desc-card-profile{
-    position: fixed;
-    bottom: 200px;
+    position: relative;
+    bottom: 100px;
 }

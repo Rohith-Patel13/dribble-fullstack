@@ -2,3 +2,9 @@
     border: 1px solid gray;
     width: 100%;
 }
+
+.footer-all-desc-bg{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}

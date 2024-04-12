@@ -41,3 +41,15 @@
     width: 320px;
     height: 290px;
 }
+.checked {
+    border-color: red;
+}
+.card-image{
+    position: relative;
+    bottom: 6.5em;
+}
+
+.desc-card-profile{
+    position: fixed;
+    bottom: 200px;
+}

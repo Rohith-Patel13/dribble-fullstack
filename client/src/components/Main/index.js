@@ -15,9 +15,9 @@ const Main = () => {
   return (
     <Routes>
       <Route path="/login" element={<Login />} />  
-      <Route path="/profile"  element={<ProtectedRoute element={<Profile />} /> } />
-      <Route path="/options"  element={<ProtectedRoute element={<Options />} />} />
-      <Route path="/"  element={<ProtectedRoute element={<Home />} />} />
+      <Route path="/profile" element={<ProtectedRoute element={<Profile />} /> } />
+      <Route path="/options" element={<ProtectedRoute element={<Options />} />} />
+      <Route path="/" element={<ProtectedRoute element={<Home />} />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )

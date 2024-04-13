@@ -103,7 +103,7 @@ exports.emailLogic = async (requestObject,responseObject)=>{
         }
         if(existingUser){
             const url = `${process.env.BASE_URL}/${existingUser._id}/verify/`
-            console.log(url,"url")
+            // console.log(url,"url")
             await sendEmailId(emailId,"Verify Email",url)
             responseObject.status(201).send({message:"An Email sent to your account please verify"})
         }

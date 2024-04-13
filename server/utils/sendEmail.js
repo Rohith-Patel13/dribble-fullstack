@@ -6,7 +6,7 @@ console.log(typeof(process.env.EMAIL_PORT))
 
 
 const sendEmailId = async(email,subject,text)=>{
-    console.log(email,subject,text)
+    // console.log(email,subject,text)
     try {
         const transporter = nodemailer.createTransport({
             host:process.env.HOST,

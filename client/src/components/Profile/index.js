@@ -28,8 +28,14 @@ const Profile = () => {
     // console.log(event.target.value)
     // console.log(event)
     // console.log(event.target.files)
-    // console.log(event.target.files[0])
+    console.log(event.target.files[0])
     setImageChoosen(event.target.files[0])
+
+    /*
+    Blob URLs are only valid for the current browsing session, and they expire 
+    when the session ends. Therefore, when you close the website and reopen it, 
+    the Blob URL becomes invalid
+    */
     Cookies.set("imageurl",URL.createObjectURL(event.target.files[0]),{expires:0.5})
     // dispatch(imageUploaded({imageUrl:URL.createObjectURL(event.target.files[0])}))
   }
@@ -40,9 +46,23 @@ const Profile = () => {
   }
 
   console.log(imageChoosen)
+
+  const logoutClicked =()=>{
+    Cookies.remove("jwtToken")
+    Cookies.remove("imageurl")
+    Cookies.remove("email")
+    navigate("/login")
+  }
+
   return (
     <div className='profile-bg'>
-      <Header />
+      <div className='flex items-center'>
+        <Header />
+        <button className="ml-3 btn btn-danger"
+        onClick={logoutClicked}
+        >Logout</button>
+      </div>
+
 
       <div className='bg-profile'>
         <div>
@@ -56,7 +76,7 @@ const Profile = () => {
              mb-5
              cursor-pointer' onClick={imageUploadClick}>
               {
-                imageChoosen!==undefined?(
+                imageChoosen?(
                   <img src={Cookies.get("imageurl")} alt='uploadedimage' className='upload-image' />
                 ):(
                   <div className='camera-bg'>

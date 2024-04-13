@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import {useDispatch} from "react-redux"
+import {useDispatch,useSelector} from "react-redux"
 import { ActionCreators } from '../../redux/slice'
 import './index.css'
 
@@ -22,16 +22,21 @@ const EachOption = (props) => {
     }
   };
 
+  const checkedArrayOfCards = useSelector((state)=>{
+    // console.log(state)
+    const {mainSlice} = state
+    const {checkedCardsArray}=mainSlice
+    return checkedCardsArray
+  })
 
 
   return (
-    <div className={`m-5 flex card
+    <div className={`card-out ${checkedArrayOfCards.length>0?'mt-5 mb-5':'mb-3'} flex card
     flex-col items-center ${isChecked ? 'checked' : ''}`}>
       <img src={image}
        className={`mb-3 w-[280px] ${isChecked?"card-image":""}`}
        alt="designer"
        />     
-
       <div className={`flex flex-col 
       justify-center items-center text-center
        ${isChecked?"desc-card-profile":""}`}> 

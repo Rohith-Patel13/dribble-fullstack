@@ -1,6 +1,9 @@
 
 import {v4 as uuidv4} from "uuid"
 import {useNavigate} from "react-router-dom"
+import { useSelector,useDispatch } from "react-redux"
+import Cookies from "js-cookie"
+import { ActionCreators } from "../../redux/slice"
 import './index.css'
 import designer from "../../images/designer.png"
 import designerInspiration from "../../images/designer-inspiration.png"
@@ -34,18 +37,36 @@ const options = [
 
 const Options = () => {
 
-   const navigate= useNavigate()
+  const {clearCardArray} = ActionCreators
+
+
+  const navigate= useNavigate()
+  const dispatch = useDispatch()
+
+  const checkedArrayOfCards = useSelector((state)=>{
+    // console.log(state)
+    const {mainSlice} = state
+    const {checkedCardsArray}=mainSlice
+    return checkedCardsArray
+  })
   
   
   const backButtonClicked =()=>{
     navigate("/profile")
+    dispatch(clearCardArray())
   }
 
   const finishButtonClicked = ()=>{
     navigate("/")
+    dispatch(clearCardArray())
   }
 
-
+  const logoutClicked =()=>{
+    Cookies.remove("jwtToken")
+    Cookies.remove("imageurl")
+    Cookies.remove("email")
+    navigate("/login")
+  }
  
   return (
     <div>
@@ -56,12 +77,14 @@ const Options = () => {
          alt="backside" 
          onClick={backButtonClicked}
          />
-         
+         <button className="ml-3 btn btn-danger"
+         onClick={logoutClicked}
+         >Logout</button>
       </div>
 
-      <div className="options-bg">
+      <div className="options-bg text-center">
         <h1 className="text-4xl font-bold mb-2">What brings you to Dribbble?</h1>
-        <p className="text-slate-500 mb-[100px]">Select the options that best describes you. Don't worry,you can explore other options later</p>
+        <p className="text-slate-500 mb-[90px]">Select the options that best describes you. Don't worry,you can explore other options later</p>
 
         <div className="flex flex-wrap justify-center items-center main-options-bg mt-3 mb-5">
           {
@@ -74,9 +97,12 @@ const Options = () => {
         </div>
 
   
-     
-        <p className="font-bold">Anything else? You can select multiple</p>
-               
+        {
+          checkedArrayOfCards.length>0 && checkedArrayOfCards.length<=2  && (
+          <p className="mb-3 font-bold">Anything else? You can select multiple</p>
+          )
+        }
+                       
 
         <button className="btn btn-danger"
         onClick={finishButtonClicked}

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import {useNavigate} from "react-router-dom"
+import {useNavigate,Navigate} from "react-router-dom"
 // import {useDispatch} from "react-redux"
 import Cookies from "js-cookie"
 import axios from "axios"
@@ -153,6 +153,7 @@ const Login = () => {
           Cookies.set("email",userEmail,{ expires: 0.5 })// Created a cookie that expires in half a day (12 hours) from now, valid across the entire site
           Cookies.set("jwtToken",response.data.jwtToken,{ expires: 0.5 })
           navigate("/profile")
+          
         }else if(response.data.errorMessage){
           console.log(response.data.errorMessage)
           setSubmissionText({text:`* ${response.data.errorMessage.errorText}`,isError:true})
@@ -168,6 +169,12 @@ const Login = () => {
       setSubmissionText({text:"* Something went wrong,Please Try again",isError:true})
     }
   }
+
+  const tokenValue = Cookies.get("jwtToken")
+  if(tokenValue){
+    return <Navigate to="/profile" /> // In Class Components We Use "Redirect" Component instead of "Navigate"
+  }
+
 
   return (
     // <div className="root-bg">

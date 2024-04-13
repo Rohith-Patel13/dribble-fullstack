@@ -21,10 +21,14 @@ const SliceReducer = createSlice({
 
 
     unCheckCards:(previousState,action)=>{
-      console.log(previousState,action)
+      // console.log(previousState,action)
       previousState.checkedCardsArray=previousState.checkedCardsArray.filter((eachId)=>(
         action.payload.unCheckedId!==eachId
       ))
+    },
+    clearCardArray : (previousState)=>{
+      console.log(previousState)
+      previousState.checkedCardsArray=[]
     }
 
     /*

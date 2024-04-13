@@ -19,7 +19,7 @@ const FinalHeader = () => {
 
   return (
     <>
-        <nav className="flex justify-between items-center p-[1em]">
+        <nav className="main-nav flex justify-between items-center p-[1em]">
             <div className='flex items-center w-[100%]'>
                 <img src={blackLogo} alt='blackLogo' />
                 <img src={isNavOpen?xmark:bars} onClick={handleBarClick}
@@ -35,11 +35,9 @@ const FinalHeader = () => {
             </div>
 
             <div className="right-nav-els">
-                <div className='flex items-center rounded bg-slate-200
-                pt-[0.6em] pb-[0.6em] pl-3 w-[150px]
-                '>
+                <div className='search-container bg-slate-200'>
                     <img src={search} className={`h-5 mr-3`} alt='search' />
-                    <input type='search' className="w-[105px] bg-slate-200" placeholder='Search'/>
+                    <input type='search' className="search-input bg-slate-200" placeholder='Search'/>
                 </div>
                 <img src={suitcase} alt="" className="h-[30px] w-[25px]" />
                 <img src={Cookies.get("imageurl")} className="h-[25px] w-[25px] profile-image" alt="P" />
@@ -50,11 +48,11 @@ const FinalHeader = () => {
         {
             isNavOpen && (
                 <div className='mobile-header mt-3 mb-2'>
-                    <p className="text-slate-400 font-bond cursor-pointer">Inspiration</p>
-                    <p className="text-slate-400 font-bond cursor-pointer">Find Work</p>
-                    <p className="text-slate-400 font-bond cursor-pointer">Learn Design</p>
-                    <p className="text-slate-400 font-bond cursor-pointer">Go Pro</p>
-                    <p className="text-slate-400 font-bond cursor-pointer">Hire Designers</p>
+                    <p className="text-slate-400 mb-2 font-bond cursor-pointer">Inspiration</p>
+                    <p className="text-slate-400 mb-2 font-bond cursor-pointer">Find Work</p>
+                    <p className="text-slate-400 mb-2 font-bond cursor-pointer">Learn Design</p>
+                    <p className="text-slate-400 mb-2 font-bond cursor-pointer">Go Pro</p>
+                    <p className="text-slate-400 mb-2 font-bond cursor-pointer">Hire Designers</p>
                 </div>
             )
         }

@@ -1,11 +1,16 @@
 import Cookies from "js-cookie"
 import './index.css'
 import envelope from "../../images/envelope.png"
+import search from "../../images/magnifying-glass-solid.svg"
 
 
 const FinalHomeBody = () => {
   return (
     <div className="flex flex-col items-center mt-5 text-center p-[1em]">
+        <div className='search-container-mobile bg-slate-200'>
+          <img src={search} className={`h-5 mr-3`} alt='search' />
+          <input type='search' className="search-input-mobile bg-slate-200" placeholder='Search'/>
+        </div>
         <h1 className="text-4xl font-bold mb-3">Please verify your email...</h1>
         <img src={envelope} alt='' className="h-[90px] mb-3" />
         <p className="text-zinc-500 mb-3">Please verify your email address. We've sent a confirmation email to:</p>

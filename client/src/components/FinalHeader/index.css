@@ -16,10 +16,20 @@
 }
 .right-nav-els{
     width: 40%;
-     
     display: flex;
     align-items:center;
     justify-content: space-evenly;
+}
+
+.search-container{
+    display: flex;
+    align-items: center;
+    border-radius: 1em;
+    padding: 0.5em;
+    width:150px;
+}
+.search-input{
+    width: 105px;
 }
 
 @media screen and (max-width:1250px) {
@@ -40,6 +50,13 @@
 
 @media screen and (max-width:760px) {
     .right-nav-els{
-        width: 200%;
+        width: 100%;
     }
+}
+
+
+@media screen and (max-width:760px) {
+   .search-container{
+       display: none;
+   }
 }

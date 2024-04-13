@@ -1,0 +1,17 @@
+.search-container-mobile{
+    display: none;
+}
+
+@media screen and (max-width:760px) {
+    .search-container-mobile{
+        display: flex;
+        align-items: center;
+        border-radius: 1em;
+        padding: 0.5em;
+        width:250px;
+        margin-bottom: 3em;
+    }
+    .search-input-mobile{
+        width: 200px;
+    }
+}

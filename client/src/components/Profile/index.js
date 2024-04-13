@@ -5,7 +5,9 @@ import Cookies from "js-cookie"
 // import { ActionCreators } from '../../redux/slice'
 import './index.css'
 import camera from "../../images/camera-solid.svg"
+import greater from "../../images/greater-than-solid.svg"
 import Header from '../Header/index'
+
 
 
 const Profile = () => {
@@ -68,7 +70,7 @@ const Profile = () => {
         <div>
           <div className='text-left'>
             <h1 className='text-4xl font-bold mb-3'>Welcome! Let's create your profile</h1>
-            <p className='mb-5'>Let others get to know you better!You can do these later</p>
+            <p className='text-slate-400 font-bold mb-5'>Let others get to know you better!You can do these later</p>
           </div>
           <div className='mt-3'>
             <h1 className='text-2xl font-bold mb-3'>Add an avatar</h1>
@@ -85,9 +87,14 @@ const Profile = () => {
                 )
               }
 
-              
-              <button type='button' className='btn choose-image'>Choose image</button>
-               
+              <div className='flex flex-col items-start'>
+                <button type='button' className='btn choose-image'>Choose image</button> 
+                <div className='ml-3 mt-2 flex items-center justify-center'>
+                  <img className='h-[15px]' src={greater} alt='greater' />
+                  <p className='text-profile ml-1'>Or choose one of our defaults</p>
+                </div>
+              </div>
+                             
               
 
               <input type='file'
@@ -104,9 +111,10 @@ const Profile = () => {
             <input type='location' className='w-[100%] mb-1'  placeholder='Enter a location' />
             <hr className='input-horizontal mb-5' />
 
-            <button type='button' className='btn btn-danger'
+            <button type='button' className='btn btn-danger w-[200px]'
             onClick={nextButtonClicked}
             >Next</button>
+            <p className='text-slate-400 mt-2'>or Press RETURN</p>
           </div>
 
         </div>

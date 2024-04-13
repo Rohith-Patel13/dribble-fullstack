@@ -104,9 +104,14 @@ const Options = () => {
         }
                        
 
-        <button className="btn btn-danger"
+        <button className="btn btn-danger w-[200px]"
         onClick={finishButtonClicked}
         >Finish</button>
+        {
+          checkedArrayOfCards.length>0 && (
+          <p className="mt-1 mb-3 text-slate-400 font-bold">or Press RETURN</p>
+          )
+        }
       </div>
 
     </div>

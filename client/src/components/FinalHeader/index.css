@@ -1,3 +1,45 @@
 .profile-image{
     border-radius: 50%;
 }
+
+.desktop-header{
+    display: flex;
+    justify-content: space-evenly;
+}
+.nav-icon{
+    display: none;
+}
+.mobile-header{
+    display: none;
+    width: 100%;
+    text-align: center;
+}
+.right-nav-els{
+    width: 40%;
+     
+    display: flex;
+    align-items:center;
+    justify-content: space-evenly;
+}
+
+@media screen and (max-width:1250px) {
+    .desktop-header{
+        display: none;
+    }
+    .nav-icon{
+        display: flex;
+    }
+    .mobile-header{
+        display: flex;
+        flex-direction: column;
+    }
+    .right-nav-els{
+        width: 100%;
+    }
+}
+
+@media screen and (max-width:760px) {
+    .right-nav-els{
+        width: 200%;
+    }
+}

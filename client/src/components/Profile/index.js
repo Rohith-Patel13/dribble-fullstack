@@ -45,7 +45,7 @@ const Profile = () => {
     navigate("/options")
   }
 
-  console.log(imageChoosen)
+  // console.log(imageChoosen)
 
   const logoutClicked =()=>{
     Cookies.remove("jwtToken")

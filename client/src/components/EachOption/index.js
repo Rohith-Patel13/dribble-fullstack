@@ -1,8 +1,13 @@
 import { useState } from 'react'
+import {useDispatch} from "react-redux"
+import { ActionCreators } from '../../redux/slice'
 import './index.css'
 
 
 const EachOption = (props) => {
+
+  const dispatch = useDispatch();
+  const {checkedCards,unCheckCards} = ActionCreators
   const {eachOption}  = props
   // console.log(eachOption)
   const {image,desc,id,para} = eachOption
@@ -10,11 +15,14 @@ const EachOption = (props) => {
 
   const handleCheckboxChange = () => {
     setIsChecked(!isChecked);
+    
+    !isChecked && dispatch(checkedCards({checkedId:eachOption.id}))
+    if(isChecked){
+      dispatch(unCheckCards({unCheckedId:eachOption.id}))
+    }
   };
 
-  // const optionChoosen =()=>{
-  //   choosen(isChecked)
-  // }
+
 
   return (
     <div className={`m-5 flex card
@@ -33,7 +41,6 @@ const EachOption = (props) => {
           <input type="checkbox"
           checked={isChecked}
           onChange={handleCheckboxChange}
-          // onClick={optionChoosen}
           id={id} className="select-option" />
           <label htmlFor={id}></label>
         </div>

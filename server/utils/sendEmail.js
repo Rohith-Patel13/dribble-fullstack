@@ -25,8 +25,7 @@ const sendEmailId = async(email,subject,text)=>{
             text:text
         })
         console.log("Email sent successfully")
-        responseObject.status(201).send({message:"An Email sent to your account please verify"})
-
+        
     } catch (error) {
         console.log("Email not sent")
         console.log(error.message,"sendEmailId at catch block")

@@ -121,7 +121,7 @@ exports.emailLogic = async (requestObject,responseObject)=>{
             const url = `${process.env.BASE_URL}${existingUser._id}/verify/${token.token}`
             console.log(url,"url")
             await sendEmailId(emailId,"Verify Email",url)
-
+            responseObject.status(201).send({message:"An Email sent to your account please verify"})
         }
     } catch (error) {
         console.log(error.message,"at server catch")

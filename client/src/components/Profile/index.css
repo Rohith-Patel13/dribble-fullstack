@@ -60,5 +60,5 @@
 }
 .nxt-profile{
     opacity: 0.3;
-    cursor: not-allowed
+    cursor: not-allowed !important
 }

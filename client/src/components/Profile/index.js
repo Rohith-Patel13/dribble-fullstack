@@ -16,6 +16,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const uploadInputRef = useRef(null)
   const [imageChoosen,setImageChoosen] = useState(Cookies.get("imageurl"))
+  const [location,setLocation] = useState("")
   
 
 
@@ -54,6 +55,10 @@ const Profile = () => {
     Cookies.remove("imageurl")
     Cookies.remove("email")
     navigate("/login")
+  }
+
+  const locationHandle =(event)=>{
+    setLocation(event.target.value)
   }
 
   return (
@@ -108,12 +113,13 @@ const Profile = () => {
 
           <div className='footer-bg'>
             <h1 className='text-2xl font-bold mb-3'>Add your location</h1>
-            <input type='location' className='w-[100%] mb-1'  placeholder='Enter a location' />
+            <input type='text' value={location} onChange={locationHandle}
+            className='w-[100%] mb-1'  placeholder='Enter a location' />
             <hr className='input-horizontal mb-5' />
 
             <div className='text-center'>
               {
-                imageChoosen?(
+                imageChoosen && location?(
                   <button type='button' className='btn btn-danger w-[200px]'
                   onClick={nextButtonClicked}
                   >Next</button>
@@ -124,8 +130,8 @@ const Profile = () => {
                 )
               }
               {
-                imageChoosen?
-                <p className='text-slate-400 mt-2'>or Press RETURN</p>
+                imageChoosen && location?
+                <p className='text-slate-400 cursor-pointer mt-2'>or Press RETURN</p>
                 :null
               }
             </div>

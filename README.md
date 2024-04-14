@@ -2,6 +2,11 @@
 https://drive.google.com/file/d/1Bj-NK_XQ4x5AGy6sJNDJInnm0HjKV6-p/view?usp=sharing
 
 
+# Output video for Mobile view:
+https://github.com/Rohith-Patel13/dribble-fullstack/assets/139628530/cb22c7ba-ba19-4aec-b7be-8243f696aa1a
+
+
+
 # Deployed Website using Netlify(For Frontend) and Render(For Backend) 
 https://dribbble-mern-website-app.netlify.app/
 

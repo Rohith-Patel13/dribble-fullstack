@@ -1,4 +1,4 @@
-# Deployed Website using Netlify(For Frontend) and Render(For Backend)
+# Deployed Website using Netlify(For Frontend) and Render(For Backend) : the website is deployed without upgrade, so delay requests by 50 seconds or more or no delay.(like when logged in,sending mails etc)
 https://dribbble-mern-website-app.netlify.app/
 
 

@@ -3,7 +3,7 @@ https://dribbble-mern-website-app.netlify.app/
 
 
 ```sh
-https://github.com/Rohith-Patel13/dribble-fullstack.git
+git clone https://github.com/Rohith-Patel13/dribble-fullstack.git
 ```
 
 

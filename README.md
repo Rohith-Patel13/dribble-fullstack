@@ -28,8 +28,8 @@ npm install
 npm start
 ```
 
-```sh
+# After completing above steps click below link to run website locally on your computer 
 http://localhost:3000
-```
+
 
 

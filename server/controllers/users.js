@@ -64,7 +64,7 @@ exports.loginUser = async (requestObject,responseObject)=>{
             console.log(comparePassword); 
             if (!comparePassword) {
                 
-                return responseObject.send({errorMessage:{errorText:"Invalid Password",at:"email"}});
+                return responseObject.send({errorMessage:{errorText:"Invalid Password",at:"password"}});
             }else{
                 const payload = {
                     username: existingUser.username,

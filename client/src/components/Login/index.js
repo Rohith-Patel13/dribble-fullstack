@@ -158,6 +158,7 @@ const Login = () => {
         }else if(response.data.errorMessage){
           console.log(response.data.errorMessage)
           setSubmissionText({text:`* ${response.data.errorMessage.errorText}`,isError:true})
+          setIsAlreadyExistsAt(response.data.errorMessage.at)
         }
         else {
           // Handle registration failure
@@ -174,6 +175,15 @@ const Login = () => {
   const tokenValue = Cookies.get("jwtToken")
   if(tokenValue){
     return <Navigate to="/profile" /> // In Class Components We Use "Redirect" Component instead of "Navigate"
+  }
+
+  const clearClicked=()=>{
+    setSubmissionText({text:"",isError:false})
+    setFormData({name: '',username: '',
+    email: '',password: '',isChecked: false,})
+    setFormDataLogin({ email: '', password: '' })
+    setValidationErrors({})
+    setIsAlreadyExistsAt(null)
   }
 
 
@@ -196,7 +206,7 @@ const Login = () => {
                     <div className='email-bg flex flex-col'>
                         <div className='flex items-center mt-3'>
                           {
-                            validationErrors.email?(
+                            validationErrors.email|| isAlreadyExistsAt==="email" ?(
                               <img src={triangleExclamation} 
                               className='h-[15px] w-[15px]'
                               alt='triangleExclamation' />
@@ -217,7 +227,7 @@ const Login = () => {
                     <div className='password-bg flex flex-col'>
                       <div className='flex items-center mt-3'>
                         {
-                          validationErrors.password?(
+                          validationErrors.password || isAlreadyExistsAt==="password"?(
                             <img src={triangleExclamation} 
                             className='h-[15px] w-[15px]'
                             alt='triangleExclamation'
@@ -235,7 +245,13 @@ const Login = () => {
                         placeholder='6+ characters' />   
                       <p className='error-text'>{validationErrors.password}</p>                
                     </div>
-                    <button type='submit' className='btn btn-danger mt-3'>Login</button>
+                    <div className='flex mt-3'>
+                    <button type='submit' className='btn btn-danger mr-3'>Login</button>
+                    <button type='button' className='btn btn-danger'
+                    onClick={clearClicked}
+                    >Clear all Fields</button>
+                    </div>
+
                   </form>
                 </>
                 ):(
@@ -260,7 +276,7 @@ const Login = () => {
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        className={`form-control ${validationErrors.username?"bg-red-200":"bg-neutral-100"}`}
+                        className={`form-control ${validationErrors.name?"bg-red-200":"bg-neutral-100"}`}
                         placeholder='Enter Your Name' />
                         <p className='error-text'>{validationErrors.name}</p>
                     </div>
@@ -278,7 +294,7 @@ const Login = () => {
                       </div>
                         <input type='text' id='usernameId'
                         
-                        className={`form-control ${validationErrors.username?"bg-red-200":"bg-neutral-100"}`}
+                        className={`form-control ${validationErrors.username || isAlreadyExistsAt==="username"?"bg-red-200":"bg-neutral-100"}`}
                         name="username"
                         value={formData.username}
                         onChange={handleChange}
@@ -303,7 +319,7 @@ const Login = () => {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
-                        className={`input-range form-control ${validationErrors.email?"bg-red-200":"bg-neutral-100"}`}
+                        className={`input-range form-control ${validationErrors.email || isAlreadyExistsAt==="email"?"bg-red-200":"bg-neutral-100"}`}
                         placeholder='Enter Your Email' />
                         <p className='error-text'>{validationErrors.email}</p>
                   </div>
@@ -326,7 +342,8 @@ const Login = () => {
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
-                        className={`input-range form-control ${validationErrors.username?"bg-red-200":"bg-neutral-100"}`}
+                        className={`input-range form-control ${validationErrors.password
+                          ?"bg-red-200":"bg-neutral-100"}`}
                         placeholder='6+ characters' />
                         <p className='error-text'>{validationErrors.password}</p>
                   </div>
@@ -345,7 +362,13 @@ const Login = () => {
 
                     <p className='error-text'>{validationErrors.isChecked}</p>
                   </div>
-                  <button type='submit' className='btn btn-danger mt-3'>Create an Account</button>
+                  <div className='flex mt-3'>
+                    <button type='submit' className='btn btn-danger mr-3'>Create an Account</button>
+                    <button type='button' className='btn btn-danger'
+                    onClick={clearClicked}
+                    >Clear all Fields</button>
+                  </div>
+
                   <p className='mt-3 ash-text'>This site is protected by reCAPTCHA and the Google <span className='violate-text'>Privacy Policy</span> and <span className='violate-text'>Notification Settings.</span></p>
                 </form>
               </>

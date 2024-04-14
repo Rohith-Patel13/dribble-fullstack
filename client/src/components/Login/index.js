@@ -220,7 +220,7 @@ const Login = () => {
                         name="email"
                         value={formDataLogin.email}
                         onChange={handleLoginEvent}
-                        className='input-range form-control bg-neutral-100 each-input'
+                        className={`input-range form-control ${validationErrors.email || isAlreadyExistsAt==="email"?"bg-red-200":"bg-neutral-100"} each-input`}
                         placeholder='Enter Your Email' />    
                         <p className='error-text'>{validationErrors.email}</p>                 
                     </div>
@@ -241,7 +241,7 @@ const Login = () => {
                         name="password"
                         value={formDataLogin.password}
                         onChange={handleLoginEvent}
-                        className='input-range form-control bg-neutral-100 each-input'
+                        className={`input-range form-control ${validationErrors.password || isAlreadyExistsAt==="password"?"bg-red-200":"bg-neutral-100"} each-input`}
                         placeholder='6+ characters' />   
                       <p className='error-text'>{validationErrors.password}</p>                
                     </div>

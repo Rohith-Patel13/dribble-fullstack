@@ -87,9 +87,9 @@ const Profile = () => {
                 )
               }
 
-              <div className='flex flex-col items-start'>
+              <div className='flex flex-col items-start ml-4'>
                 <button type='button' className='btn choose-image'>Choose image</button> 
-                <div className='ml-3 mt-2 flex items-center justify-center'>
+                <div className='mt-3 flex items-center justify-center'>
                   <img className='h-[15px]' src={greater} alt='greater' />
                   <p className='text-profile ml-1'>Or choose one of our defaults</p>
                 </div>
@@ -111,10 +111,26 @@ const Profile = () => {
             <input type='location' className='w-[100%] mb-1'  placeholder='Enter a location' />
             <hr className='input-horizontal mb-5' />
 
-            <button type='button' className='btn btn-danger w-[200px]'
-            onClick={nextButtonClicked}
-            >Next</button>
-            <p className='text-slate-400 mt-2'>or Press RETURN</p>
+            <div className='text-center'>
+              {
+                imageChoosen?(
+                  <button type='button' className='btn btn-danger w-[200px]'
+                  onClick={nextButtonClicked}
+                  >Next</button>
+                ):(
+                  <button type='button' className='nxt-profile btn btn-danger w-[200px]'
+                  // onClick={nextButtonClicked} --> click event disabled
+                  >Next</button>
+                )
+              }
+              {
+                imageChoosen?
+                <p className='text-slate-400 mt-2'>or Press RETURN</p>
+                :null
+              }
+            </div>
+
+            
           </div>
 
         </div>

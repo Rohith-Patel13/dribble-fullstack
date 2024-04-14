@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
 
 const sendEmailId = require("../utils/sendEmail"); // Node.js doesn't support ES6 import statements natively yet. So, Use CommonJS syntax (require/module.exports)
-const crypto = require("crypto") // global module, so need not to install
+// const crypto = require("crypto") // global module, so need not to install
 
 
 
@@ -102,9 +102,10 @@ exports.emailLogic = async (requestObject,responseObject)=>{
             responseObject.send("Invalid user");
         }
         if(existingUser){
-            const url = `${process.env.BASE_URL}/${existingUser._id}/verify/`
+            // const url = `${process.env.BASE_URL}/${existingUser._id}/verify/`
             // console.log(url,"url")
-            await sendEmailId(emailId,"Verify Email",url)
+            const text = "You have successfully logged In to dribbble"
+            await sendEmailId(emailId,"Thank You for Visiting Our dribbble Website!",text)
             responseObject.status(201).send({message:"An Email sent to your account please verify"})
         }
     } catch (error) {

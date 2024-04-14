@@ -145,7 +145,7 @@ const Login = () => {
       if (validateFormLogin()){
         const response = await axios.post('http://localhost:8000/api/users/login',formDataLogin)
         console.log(response,"response")
-        if (response.status===200) {
+        if (response.status===200 && !response.data.errorMessage) {
           // Handle successful registration, maybe redirect to another page
           console.log("Login success")
           console.log(response.data.userData)
@@ -162,7 +162,7 @@ const Login = () => {
         else {
           // Handle registration failure
           console.log(response,"Login failed")
-          setSubmissionText({text:"* Login failed",isError:true})
+          setSubmissionText({text:`* Login failed,Try again with correct credentials`,isError:true})
         }
       }
     } catch (error) {

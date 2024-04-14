@@ -5,6 +5,8 @@ https://dribbble-mern-website-app.netlify.app/
 The website is deployed free without upgrade, so delay requests by 50 seconds or more or no delay.(like when logged in,sending mails etc)
 
 
+
+How to clone and run application
 ```sh
 git clone https://github.com/Rohith-Patel13/dribble-fullstack.git
 ```
@@ -34,7 +36,6 @@ touch .env
 ```sh
 MONGODB_URI = mongodb+srv://<username>:<password>@<hostname>/<database_name>
 SECRET_STRING = MY_SECRET_TOKEN_STRING
-BASE_URL = https://dribbble-mern-website-app.netlify.app/
 HOST = smtp.gmail.com
 SERVICE = gmail
 EMAIL_PORT = 587

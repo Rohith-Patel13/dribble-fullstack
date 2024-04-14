@@ -5,3 +5,8 @@
     align-items: center;
     padding: 2em;
 }
+
+.finish-options{
+    opacity: 0.3;
+    cursor: not-allowed !important;
+}

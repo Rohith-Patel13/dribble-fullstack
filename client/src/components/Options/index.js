@@ -104,12 +104,23 @@ const Options = () => {
         }
                        
 
-        <button className="btn btn-danger w-[200px]"
-        onClick={finishButtonClicked}
-        >Finish</button>
+
+
+        {
+          checkedArrayOfCards.length>0 ? (
+            <button className="btn btn-danger w-[200px]"
+            onClick={finishButtonClicked}
+            >Finish</button>
+          ):(
+            <button className="btn btn-danger finish-options w-[200px]"
+            // onClick={finishButtonClicked} --> disabled if options not selected
+            >Finish</button>
+          )
+        }
+
         {
           checkedArrayOfCards.length>0 && (
-          <p className="mt-1 mb-3 text-slate-400 font-bold">or Press RETURN</p>
+          <p className="mt-1 mb-3 text-slate-400 cursor-pointer font-bold">or Press RETURN</p>
           )
         }
       </div>

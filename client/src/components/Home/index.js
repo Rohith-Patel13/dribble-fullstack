@@ -8,13 +8,15 @@ import Footer from "../Footer/index"
 
 
 const Home = () => {
-  
+  const emailId = Cookies.get("email");
+  console.log(emailId)
+
   useEffect(()=>{
+
 
     const sendEmail = async ()=>{
       try {
-        const emailId = Cookies.get("email");
-        console.log(emailId)
+
         const response = await axios.post("http://localhost:8000/api/users/sendemail",{emailId});
         console.log(response)
       } catch (error) {
@@ -22,8 +24,8 @@ const Home = () => {
       }
     };
     sendEmail();
-  },[]); // Empty dependency array ensures this effect runs only once
-
+  },[emailId]); 
+  
   return (
     <div className="home-bg">
       <FinalHeader />

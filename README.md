@@ -11,7 +11,7 @@ The website is deployed free without upgrade, so delay requests by 50 seconds or
 
 
 
-# How to clone and run application locally
+# How to clone and run application on local computer
 ```sh
 git clone https://github.com/Rohith-Patel13/dribble-fullstack.git
 ```

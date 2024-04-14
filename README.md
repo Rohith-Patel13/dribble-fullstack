@@ -6,7 +6,12 @@ The website is deployed free without upgrade, so delay requests by 50 seconds or
 
 
 
-How to clone and run application
+
+
+
+
+
+# How to clone and run application
 ```sh
 git clone https://github.com/Rohith-Patel13/dribble-fullstack.git
 ```

@@ -27,6 +27,24 @@ cd ../server
 ```
 
 ```sh
+touch .env
+```
+
+# .env file code:
+```sh
+MONGODB_URI = mongodb+srv://<username>:<password>@<hostname>/<database_name>
+SECRET_STRING = MY_SECRET_TOKEN_STRING
+BASE_URL = https://dribbble-mern-website-app.netlify.app/
+HOST = smtp.gmail.com
+SERVICE = gmail
+EMAIL_PORT = 587
+SECURE = true 
+USER = your email address
+PASS = generate a password by using mentioned USER email field profile
+```
+
+
+```sh
 npm install
 ```
 

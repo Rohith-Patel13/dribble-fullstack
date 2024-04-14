@@ -11,7 +11,7 @@ const FinalHomeBody = () => {
     try {
       const emailId = Cookies.get("email");
       console.log(emailId)
-      const response = await axios.post("http://localhost:8000/api/users/sendemail",{emailId});
+      const response = await axios.post("https://dribble-mern-stack-app.onrender.com/api/users/sendemail",{emailId});
       console.log(response,"email resend successfully")
     } catch (error) {
       console.log(error.message,"at catch client")

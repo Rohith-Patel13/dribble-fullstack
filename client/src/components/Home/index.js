@@ -17,7 +17,7 @@ const Home = () => {
     const sendEmail = async ()=>{
       try {
 
-        const response = await axios.post("http://localhost:8000/api/users/sendemail",{emailId});
+        const response = await axios.post("https://dribble-mern-stack-app.onrender.com/api/users/sendemail",{emailId});
         console.log(response)
       } catch (error) {
         console.log(error.message,"at catch client")
